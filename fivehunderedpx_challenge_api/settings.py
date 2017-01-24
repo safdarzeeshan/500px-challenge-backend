@@ -37,6 +37,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
+    'fivehunderedpx_api',
+    # AUTH
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+    # SOCIAL AUTH
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.fivehundredpx',
 ]
 
 MIDDLEWARE = [
@@ -132,9 +145,36 @@ USE_L10N = True
 
 USE_TZ = True
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication'
+    )
+}
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+# REST_SESSION_LOGIN = False
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+SITE_ID = 2
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_USERNAME_REQUIRED = False
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ACCOUNT_EMAIL_VERIFICATION = 'optional'
+# LOGOUT_ON_PASSWORD_CHANGE = False
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
+
+SOCIAL_AUTH_AUTHENTICATION_BACKENDS = (
+    'social_core.backends.open_id.OpenIdAuth',
+)
+
+SOCIALACCOUNT_PROVIDERS = {'fivehundredpx': {}}
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static/'
