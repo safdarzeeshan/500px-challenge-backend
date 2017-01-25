@@ -96,7 +96,7 @@ class RequestToken(APIView):
         authorization_base_url = 'https://api.500px.com/v1/oauth/authorize'
 
         # Fetch a request token
-        fivehundredpx = OAuth1Session(settings.CONSUMER_KEY, client_secret=settings.CONSUMER_SECRET, callback_uri='http://127.0.0.1:9000/redirect')
+        fivehundredpx = OAuth1Session(settings.CONSUMER_KEY, client_secret=settings.CONSUMER_SECRET, callback_uri=settings.CALLBACK_URL)
         fetch_response = fivehundredpx.fetch_request_token(request_token_url)
 
         resource_owner_key = fetch_response.get('oauth_token')
@@ -104,7 +104,7 @@ class RequestToken(APIView):
         OauthTokenSecret.objects.create(oauth_token=resource_owner_key, oauth_token_secret=resource_owner_secret)
 
         # Redirect user to 500px for authorization
-        authorization_url = fivehundredpx.authorization_url(authorization_base_url, callback_uri='http://127.0.0.1:9000/redirect')
+        authorization_url = fivehundredpx.authorization_url(authorization_base_url, callback_uri=settings.CALLBACK_URL)
 
         return JsonResponse({'authorization_url': authorization_url})
 

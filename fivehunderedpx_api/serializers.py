@@ -11,7 +11,6 @@ if 'allauth.socialaccount' in settings.INSTALLED_APPS:
 
 class FiveHundredPxLoginSerializer(serializers.Serializer):
 
-    print 'in 500px serializer'
     access_token = serializers.CharField()
     token_secret = serializers.CharField()
 
