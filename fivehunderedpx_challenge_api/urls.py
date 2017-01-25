@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^api/popularphotos/', PopularPhotosList.as_view(), name="PopularPhotosList"),
     url(r'^api/photodetail$', PhotoDetail.as_view(), name="PhotoDetail"),
     url(r'^api/likephoto$', LikePhoto.as_view(), name="LikePhoto"),
+    url(r'^api/unlikephoto$', UnlikePhoto.as_view(), name="LikePhoto"),
     url(r'^api/requesttoken/', RequestToken.as_view(), name="RequestToken"),
     url(r'^api/accesstoken$', AccessToken.as_view(), name="AccessToken"),
 ]

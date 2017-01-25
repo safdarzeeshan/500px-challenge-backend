@@ -148,7 +148,6 @@ USE_TZ = True
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication'
     )
 }
 
@@ -157,14 +156,7 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-# REST_SESSION_LOGIN = False
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SITE_ID = 2
-# ACCOUNT_EMAIL_REQUIRED = True
-# ACCOUNT_USERNAME_REQUIRED = False
-# ACCOUNT_AUTHENTICATION_METHOD = 'email'
-# ACCOUNT_EMAIL_VERIFICATION = 'optional'
-# LOGOUT_ON_PASSWORD_CHANGE = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -179,3 +171,8 @@ SOCIALACCOUNT_PROVIDERS = {'fivehundredpx': {}}
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static/'
 
+CONSUMER_KEY = 'YI4wh0gAdmryhV27jqUBYtIAUdv5qvDrA4qyf5AK'
+CONSUMER_SECRET = 'YFze8NX1IlfwQzLJUc9I54QsO2dniWEpWFk2FxCk'
+BASE_URL = 'https://api.500px.com/v1/'
+# CALLBACK_URL = 'http://127.0.0.1:9000/redirect'
+CALLBACK_URL = 'http://500px.zeeshansafdar.com/redirect'
