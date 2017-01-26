@@ -12,6 +12,8 @@ from django.contrib.auth.models import AnonymousUser
 from fivehunderedpx_challenge_api.settings import *
 
 
+# User passes oauth token and oauth token secret to login/register. Api sends back
+# and authorization token.
 class FiveHundredPxLogin(LoginView):
     serializer_class = FiveHundredPxLoginSerializer
     adapter_class = FiveHundredPxOAuthAdapter
@@ -29,7 +31,7 @@ class PopularPhotosList(APIView):
                 settings.BASE_URL + 'photos/',
                 params = {'feature': 'popular', 'image_size':'4,5', 'consumer_key': settings.CONSUMER_KEY})
 
-        # Make a request with User Auth token
+        # Make a request with User Auth token. This is to see what images the user has liked
         else:
             oauth = SocialToken.objects.get(account__user=user, account__provider='500px')
             auth = OAuth1(settings.CONSUMER_KEY, settings.CONSUMER_SECRET, oauth.token, oauth.token_secret)
@@ -88,6 +90,8 @@ class UnlikePhoto(APIView):
         return JsonResponse(json.loads(response.content))
 
 
+# First step in OAuth1 verification. User makes a request to his api and is
+# sent back a URL where they can authorize their 500px account
 class RequestToken(APIView):
 
     def get(self, request):
@@ -109,6 +113,8 @@ class RequestToken(APIView):
         return JsonResponse({'authorization_url': authorization_url})
 
 
+# Second step in OAuth1 verification. User passes oath verifier and oauth token is
+# sent back the access token and access token secret
 class AccessToken(APIView):
 
     def get(self, request):
